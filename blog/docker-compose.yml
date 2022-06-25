@@ -1,0 +1,18 @@
+services:
+  web:
+    build:
+      context: .
+      dockerfile: ./web.Dockerfile
+    volumes:
+      - .:/clean_web
+    depends_on:
+      - database
+
+  database:
+    image: postgres:14.1-alpine
+    environment:
+      POSTGRES_USER: ${UserDBUsername}
+      POSTGRES_PASSWORD: ${UserDBPassword}
+      POSTGRES_DATABASE: ${UserDBName}
+    volumes:
+      - blog_db:/var/lib/postgresql/data

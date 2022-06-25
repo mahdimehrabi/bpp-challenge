@@ -1,0 +1,29 @@
+version: "3.3"
+
+services:
+#-----blog service----
+  blog:
+    extends:
+      file: ./blog/docker-compose.yml
+      service: web
+  blogdb:
+    extends:
+      file: ./blog/docker-compose.yml
+      service: database
+
+  #-----user service------
+  user:
+    extends:
+      file: ./user/docker-compose.yml
+      service: web
+  userdb:
+    extends:
+      file: ./user/docker-compose.yml
+      service: database
+
+
+volumes:
+  blog_db:
+    external: true
+  user_db:
+    external: true
