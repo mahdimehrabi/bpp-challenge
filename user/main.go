@@ -6,13 +6,19 @@ import (
 	"net/http"
 	"os"
 	"time"
+	"user/app/controllers"
 	"user/app/infrastractures"
+	"user/app/repositories"
 	"user/app/routes"
+	"user/app/services"
 )
 
 var BootstrapModule = fx.Options(
 	infrastractures.Module,
 	routes.Modules,
+	controllers.Module,
+	services.Module,
+	repositories.Module,
 	fx.Invoke(Bootstrap),
 )
 

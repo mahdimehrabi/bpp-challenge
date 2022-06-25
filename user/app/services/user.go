@@ -1,6 +1,7 @@
 package services
 
 import (
+	"user/app/infrastractures"
 	"user/app/interfaces"
 	"user/app/repositories"
 )
@@ -17,4 +18,12 @@ func (s UserService) Create(name string, vip bool) error {
 	}
 	s.logger.Error(err.Error())
 	return err
+}
+
+func NewUserService(logger infrastractures.PasargadLogger, userRepository repositories.UserRepository) *UserService {
+
+	return &UserService{
+		logger:         &logger,
+		userRepository: userRepository,
+	}
 }

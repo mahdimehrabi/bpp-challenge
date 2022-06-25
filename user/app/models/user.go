@@ -1,7 +1,39 @@
 package models
 
+import (
+	"context"
+	"encoding/json"
+	"net/http"
+)
+
 type User struct {
 	ID   int64  `json:"ID"`
 	Name string `json:"name"`
 	VIP  bool   `json:"VIP"`
+}
+
+type UserRequest struct {
+	Name string `json:"name"`
+	VIP  bool   `json:"vip"`
+}
+
+type OperationMessage struct {
+	Message string `json:"message"`
+}
+
+type UserResponse struct {
+	V   string `json:"v"`
+	Err string `json:"err,omitempty"`
+}
+
+func DecodeUserRequest(_ context.Context, r *http.Request) (interface{}, error) {
+	var request UserRequest
+	if err := json.NewDecoder(r.Body).Decode(&request); err != nil {
+		return nil, err
+	}
+	return request, nil
+}
+
+func EncodeResponse(_ context.Context, w http.ResponseWriter, response interface{}) error {
+	return json.NewEncoder(w).Encode(response)
 }
