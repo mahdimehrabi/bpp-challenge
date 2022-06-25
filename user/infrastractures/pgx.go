@@ -1,11 +1,11 @@
-package infrastracture
+package infrastractures
 
 import (
-	"challange/app/interfaces"
 	"context"
 	"fmt"
 	"github.com/jackc/pgx/v4"
 	"os"
+	"user/interfaces"
 )
 
 type Transaction struct {
@@ -30,7 +30,7 @@ type PgxDB struct {
 	Conn   *pgx.Conn
 }
 
-func NewPgxDB(logger ArvanLogger) PgxDB {
+func NewPgxDB(logger PasargadLogger) PgxDB {
 	connString := fmt.Sprintf(
 		"postgres://%s:%s@%s:%s/%s",
 		os.Getenv("DBUsername"), os.Getenv("DBPassword"),

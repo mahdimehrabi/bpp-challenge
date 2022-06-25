@@ -1,19 +1,19 @@
-package infrastracture
+package infrastractures
 
 import (
 	"log"
 	"os"
 )
 
-type ArvanLogger struct {
+type PasargadLogger struct {
 	LG *log.Logger
 }
 
-func (l *ArvanLogger) Error(err string) {
+func (l *PasargadLogger) Error(err string) {
 	l.LG.Print(err)
 }
 
-func NewLogger() ArvanLogger {
+func NewLogger() PasargadLogger {
 	lg := log.New(os.Stdout, "arvan ", log.LstdFlags)
-	return ArvanLogger{LG: lg}
+	return PasargadLogger{LG: lg}
 }
