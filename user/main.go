@@ -3,7 +3,7 @@ package main
 import (
 	"fmt"
 	"go.uber.org/fx"
-	"user/infrastractures"
+	"user/app/infrastractures"
 )
 
 var BootstrapModule = fx.Options(

@@ -1,6 +1,8 @@
 package interfaces
 
-import "user/models"
+import (
+	"user/app/models"
+)
 
 type UserService interface {
 	Create(string, bool) error
