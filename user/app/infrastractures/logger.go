@@ -14,6 +14,6 @@ func (l *PasargadLogger) Error(err string) {
 }
 
 func NewLogger() PasargadLogger {
-	lg := log.New(os.Stdout, "arvan ", log.LstdFlags)
+	lg := log.New(os.Stdout, "pasargad ", log.LstdFlags)
 	return PasargadLogger{LG: lg}
 }

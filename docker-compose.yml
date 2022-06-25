@@ -20,7 +20,13 @@ services:
     extends:
       file: ./user/docker-compose.yml
       service: database
+  nginx:
+    build:
+      context: ./nginx
+      dockerfile: ./Dockerfile
 
+    ports:
+      - "${Port}:80"
 
 volumes:
   blog_db:
