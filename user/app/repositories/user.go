@@ -4,6 +4,7 @@ import (
 	"context"
 	infrastractures2 "user/app/infrastractures"
 	interfaces2 "user/app/interfaces"
+	"user/app/models"
 )
 
 type UserRepository struct {
@@ -23,4 +24,19 @@ func (u *UserRepository) Create(name string, vip bool) error {
 		"INSERT INTO users(name,vip) VALUES($1,$2)",
 		[]interface{}{name, vip})
 	return err
+}
+
+func (u *UserRepository) List() (users []models.User, err error) {
+	values, err := u.db.Query(context.Background(),
+		"SELECT * FROM users",
+		[]interface{}{})
+	for _, v := range values {
+		user := models.User{
+			ID:   int64(v[0].(int32)),
+			VIP:  v[1].(bool),
+			Name: v[2].(string),
+		}
+		users = append(users, user)
+	}
+	return users, err
 }

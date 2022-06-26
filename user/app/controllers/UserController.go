@@ -32,3 +32,13 @@ func (c UserController) Create() endpoint.Endpoint {
 		return models.OperationMessage{"User created successfully!"}, nil
 	}
 }
+
+func (c UserController) List() endpoint.Endpoint {
+	return func(_ context.Context, request interface{}) (interface{}, error) {
+		users, err := c.userService.List()
+		if err != nil {
+			return users, nil
+		}
+		return users, nil
+	}
+}

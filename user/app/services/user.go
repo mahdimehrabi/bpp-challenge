@@ -3,6 +3,7 @@ package services
 import (
 	"user/app/infrastractures"
 	"user/app/interfaces"
+	"user/app/models"
 	"user/app/repositories"
 )
 
@@ -18,6 +19,15 @@ func (s UserService) Create(name string, vip bool) error {
 		return err
 	}
 	return nil
+}
+
+func (s UserService) List() ([]models.User, error) {
+	users, err := s.userRepository.List()
+	if err != nil {
+		s.logger.Error(err.Error())
+		return users, err
+	}
+	return users, nil
 }
 
 func NewUserService(logger infrastractures.PasargadLogger, userRepository repositories.UserRepository) *UserService {

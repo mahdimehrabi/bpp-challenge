@@ -1,6 +1,7 @@
 package routes
 
 import (
+	"github.com/go-kit/kit/endpoint"
 	httptransport "github.com/go-kit/kit/transport/http"
 	"net/http"
 	"user/app/controllers"
@@ -14,13 +15,18 @@ type UserRoute struct {
 }
 
 func (r UserRoute) Handle(sm *http.ServeMux) {
-	sm.Handle("/users", httptransport.NewServer(
-		r.userController.Create(),
-		models.DecodeUserRequest,
-		models.EncodeResponse,
-	))
+	sm.Handle("/users", Handle(r.userController.Create()))
+	sm.Handle("/users/list", Handle(r.userController.List()))
 }
 
 func NewUserRoute(logger infrastractures.PasargadLogger, userController controllers.UserController) *UserRoute {
 	return &UserRoute{logger: logger, userController: userController}
+}
+
+func Handle(endpoint endpoint.Endpoint) *httptransport.Server {
+	return httptransport.NewServer(
+		endpoint,
+		models.DecodeUserRequest,
+		models.EncodeResponse,
+	)
 }
