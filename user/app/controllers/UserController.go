@@ -53,3 +53,15 @@ func (c UserController) Detail() endpoint.Endpoint {
 		return user, nil
 	}
 }
+
+func (c UserController) Update() endpoint.Endpoint {
+	return func(_ context.Context, request interface{}) (interface{}, error) {
+		req := request.(models.UpdateUserRequest)
+		err := c.userService.Update(req.ID, req.Name, req.VIP)
+		if err != nil {
+			return models.OperationMessage{"failed to update user!"}, nil
+		}
+
+		return models.OperationMessage{"User updated successfully!"}, nil
+	}
+}

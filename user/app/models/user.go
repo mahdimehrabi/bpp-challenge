@@ -30,8 +30,20 @@ type FindUserRequest struct {
 	ID int64 `json:"ID"`
 }
 
+type UpdateUserRequest struct {
+	User
+}
+
 func DecodeUserRequest(_ context.Context, r *http.Request) (interface{}, error) {
 	var request UserRequest
+	if err := json.NewDecoder(r.Body).Decode(&request); err != nil {
+		return nil, err
+	}
+	return request, nil
+}
+
+func DecodeUpdateUserRequest(_ context.Context, r *http.Request) (interface{}, error) {
+	var request UpdateUserRequest
 	if err := json.NewDecoder(r.Body).Decode(&request); err != nil {
 		return nil, err
 	}

@@ -47,3 +47,10 @@ func (u *UserRepository) Detail(id int64) (user models.User, err error) {
 		[]interface{}{id}, &user.ID, &user.Name, &user.VIP)
 	return
 }
+
+func (u *UserRepository) Update(id int64, name string, vip bool) error {
+	_, err := u.db.Exec(context.Background(),
+		"UPDATE users SET name=$1,vip=$2 WHERE id=$3",
+		[]interface{}{name, vip, id})
+	return err
+}

@@ -39,6 +39,15 @@ func (s UserService) Detail(id int64) (user models.User, err error) {
 	return
 }
 
+func (s UserService) Update(id int64, name string, vip bool) error {
+	err := s.userRepository.Update(id, name, vip)
+	if err != nil {
+		s.logger.Error(err.Error())
+		return err
+	}
+	return nil
+}
+
 func NewUserService(logger infrastractures.PasargadLogger, userRepository repositories.UserRepository) *UserService {
 
 	return &UserService{
