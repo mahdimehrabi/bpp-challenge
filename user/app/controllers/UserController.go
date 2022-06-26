@@ -48,7 +48,7 @@ func (c UserController) Detail() endpoint.Endpoint {
 		req := request.(models.FindUserRequest)
 		user, err := c.userService.Detail(req.ID)
 		if err != nil {
-			return user, nil
+			return models.OperationMessage{Message: "No user found"}, nil
 		}
 		return user, nil
 	}

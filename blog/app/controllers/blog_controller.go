@@ -48,7 +48,7 @@ func (c BlogController) Detail() endpoint.Endpoint {
 		req := request.(models.FindArticleResponse)
 		user, err := c.articleService.Detail(req.ID)
 		if err != nil {
-			return user, nil
+			return models.OperationMessage{Message: "No article found"}, nil
 		}
 		return user, nil
 	}
