@@ -54,3 +54,10 @@ func (u *UserRepository) Update(id int64, name string, vip bool) error {
 		[]interface{}{name, vip, id})
 	return err
 }
+
+func (u *UserRepository) Delete(id int64) error {
+	_, err := u.db.Exec(context.Background(),
+		"DELETE FROM users WHERE id=$1",
+		[]interface{}{id})
+	return err
+}

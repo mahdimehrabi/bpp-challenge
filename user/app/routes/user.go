@@ -22,6 +22,7 @@ func (r UserRoute) Handle(sm *http.ServeMux) {
 	sm.Handle("/users/list", Handle(r.userController.List(), models.DecodeUserRequest))
 	sm.Handle("/users/detail", Handle(r.userController.Detail(), models.DecodeFindUserRequest))
 	sm.Handle("/users/update", Handle(r.userController.Update(), models.DecodeUpdateUserRequest))
+	sm.Handle("/users/delete", Handle(r.userController.Delete(), models.DecodeFindUserRequest))
 }
 
 func NewUserRoute(logger infrastractures.PasargadLogger, userController controllers.UserController) *UserRoute {

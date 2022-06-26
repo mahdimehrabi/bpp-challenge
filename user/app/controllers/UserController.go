@@ -65,3 +65,15 @@ func (c UserController) Update() endpoint.Endpoint {
 		return models.OperationMessage{"User updated successfully!"}, nil
 	}
 }
+
+func (c UserController) Delete() endpoint.Endpoint {
+	return func(_ context.Context, request interface{}) (interface{}, error) {
+		req := request.(models.FindUserRequest)
+		err := c.userService.Delete(req.ID)
+		if err != nil {
+			return models.OperationMessage{"failed to delete user!"}, nil
+		}
+
+		return models.OperationMessage{"User delete successfully!"}, nil
+	}
+}

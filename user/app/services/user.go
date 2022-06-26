@@ -48,6 +48,15 @@ func (s UserService) Update(id int64, name string, vip bool) error {
 	return nil
 }
 
+func (s UserService) Delete(id int64) error {
+	err := s.userRepository.Delete(id)
+	if err != nil {
+		s.logger.Error(err.Error())
+		return err
+	}
+	return nil
+}
+
 func NewUserService(logger infrastractures.PasargadLogger, userRepository repositories.UserRepository) *UserService {
 
 	return &UserService{
