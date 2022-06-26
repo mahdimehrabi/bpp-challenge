@@ -1,11 +1,11 @@
 package infrastractures
 
 import (
+	interfaces2 "blog/app/interfaces"
 	"context"
 	"fmt"
 	"github.com/jackc/pgx/v4"
 	"os"
-	interfaces2 "user/app/interfaces"
 )
 
 type Transaction struct {

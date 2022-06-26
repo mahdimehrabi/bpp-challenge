@@ -1,10 +1,10 @@
 package repositories
 
 import (
+	infrastractures2 "blog/app/infrastractures"
+	interfaces2 "blog/app/interfaces"
+	"blog/app/models"
 	"context"
-	infrastractures2 "user/app/infrastractures"
-	interfaces2 "user/app/interfaces"
-	"user/app/models"
 )
 
 type ArticleRepository struct {

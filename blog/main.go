@@ -1,16 +1,17 @@
 package main
 
 import (
+	"blog/app/controllers"
+	"blog/app/infrastractures"
+	"blog/app/middlewares"
+	"blog/app/repositories"
+	"blog/app/routes"
+	"blog/app/services"
 	"context"
 	"go.uber.org/fx"
 	"net/http"
 	"os"
 	"time"
-	"user/app/controllers"
-	"user/app/infrastractures"
-	"user/app/repositories"
-	"user/app/routes"
-	"user/app/services"
 )
 
 var BootstrapModule = fx.Options(
@@ -19,6 +20,7 @@ var BootstrapModule = fx.Options(
 	controllers.Module,
 	services.Module,
 	repositories.Module,
+	middlewares.Modules,
 	fx.Invoke(Bootstrap),
 )
 

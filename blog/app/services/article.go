@@ -1,10 +1,10 @@
 package services
 
 import (
-	"user/app/infrastractures"
-	"user/app/interfaces"
-	"user/app/models"
-	"user/app/repositories"
+	"blog/app/infrastractures"
+	"blog/app/interfaces"
+	"blog/app/models"
+	"blog/app/repositories"
 )
 
 type ArticleService struct {

@@ -1,12 +1,12 @@
 package controllers
 
 import (
+	"blog/app/infrastractures"
+	"blog/app/interfaces"
+	"blog/app/models"
+	"blog/app/services"
 	"context"
 	"github.com/go-kit/kit/endpoint"
-	"user/app/infrastractures"
-	"user/app/interfaces"
-	"user/app/models"
-	"user/app/services"
 )
 
 type BlogController struct {
@@ -45,7 +45,7 @@ func (c BlogController) List() endpoint.Endpoint {
 
 func (c BlogController) Detail() endpoint.Endpoint {
 	return func(_ context.Context, request interface{}) (interface{}, error) {
-		req := request.(models.FindArticleResponse)
+		req := request.(models.FindByIDRequest)
 		user, err := c.articleService.Detail(req.ID)
 		if err != nil {
 			return models.OperationMessage{Message: "No article found"}, nil
@@ -68,7 +68,7 @@ func (c BlogController) Update() endpoint.Endpoint {
 
 func (c BlogController) Delete() endpoint.Endpoint {
 	return func(_ context.Context, request interface{}) (interface{}, error) {
-		req := request.(models.FindArticleResponse)
+		req := request.(models.FindByIDRequest)
 		err := c.articleService.Delete(req.ID)
 		if err != nil {
 			return models.OperationMessage{"failed to delete article!"}, nil

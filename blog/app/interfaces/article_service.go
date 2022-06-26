@@ -1,10 +1,10 @@
 package interfaces
 
 import (
-	"user/app/models"
+	"blog/app/models"
 )
 
-type UserService interface {
+type ArticleService interface {
 	Create(string, bool) error
 	List() ([]models.Article, error)
 	Detail() (models.Article, error)
