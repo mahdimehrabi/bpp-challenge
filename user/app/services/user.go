@@ -14,10 +14,10 @@ type UserService struct {
 func (s UserService) Create(name string, vip bool) error {
 	err := s.userRepository.Create(name, vip)
 	if err != nil {
-		return nil
+		s.logger.Error(err.Error())
+		return err
 	}
-	s.logger.Error(err.Error())
-	return err
+	return nil
 }
 
 func NewUserService(logger infrastractures.PasargadLogger, userRepository repositories.UserRepository) *UserService {
