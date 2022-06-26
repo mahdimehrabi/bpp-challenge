@@ -1,11 +1,11 @@
-package infrastracture
+package infrastractures
 
 import (
-	"challange/app/interfaces"
 	"context"
 	"fmt"
 	"github.com/jackc/pgx/v4"
 	"os"
+	interfaces2 "user/app/interfaces"
 )
 
 type Transaction struct {
@@ -26,16 +26,16 @@ func (t Transaction) Commit(ctx context.Context) error {
 }
 
 type PgxDB struct {
-	logger interfaces.Logger
+	logger interfaces2.Logger
 	Conn   *pgx.Conn
 }
 
-func NewPgxDB(logger ArvanLogger) PgxDB {
+func NewPgxDB(logger PasargadLogger) PgxDB {
 	connString := fmt.Sprintf(
 		"postgres://%s:%s@%s:%s/%s",
-		os.Getenv("DBUsername"), os.Getenv("DBPassword"),
-		os.Getenv("DBHost"), os.Getenv("DBPort"),
-		os.Getenv("DBName"),
+		os.Getenv("BlogDBUsername"), os.Getenv("BlogDBPassword"),
+		os.Getenv("BlogDBHost"), os.Getenv("BlogDBPort"),
+		os.Getenv("BlogDBName"),
 	)
 	conn, err := pgx.Connect(context.TODO(), connString)
 	if err != nil {
@@ -89,7 +89,7 @@ func (db *PgxDB) QueryRow(
 	return db.Conn.QueryRow(ctx, query, parameters...).Scan(scans...)
 }
 
-func (db *PgxDB) Begin(ctx context.Context) (interfaces.Transaction, error) {
+func (db *PgxDB) Begin(ctx context.Context) (interfaces2.Transaction, error) {
 	t, err := db.Conn.Begin(ctx)
 	tx := Transaction{Tx: t}
 	return tx, err

@@ -8,11 +8,12 @@ services:
     depends_on:
       - database
 
+
   database:
     image: postgres:14.1-alpine
     environment:
-      POSTGRES_USER: ${UserDBUsername}
-      POSTGRES_PASSWORD: ${UserDBPassword}
-      POSTGRES_DATABASE: ${UserDBName}
+      POSTGRES_USER: ${BlogDBUsername}
+      POSTGRES_PASSWORD: ${BlogDBPassword}
+      POSTGRES_DATABASE: ${BlogDBName}
     volumes:
       - blog_db:/var/lib/postgresql/data
