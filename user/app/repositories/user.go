@@ -40,3 +40,10 @@ func (u *UserRepository) List() (users []models.User, err error) {
 	}
 	return users, err
 }
+
+func (u *UserRepository) Detail(id int64) (user models.User, err error) {
+	err = u.db.QueryRow(context.Background(),
+		"SELECT id,name,vip FROM users WHERE id=$1",
+		[]interface{}{id}, &user.ID, &user.Name, &user.VIP)
+	return
+}

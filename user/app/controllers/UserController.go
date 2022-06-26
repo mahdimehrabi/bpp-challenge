@@ -42,3 +42,14 @@ func (c UserController) List() endpoint.Endpoint {
 		return users, nil
 	}
 }
+
+func (c UserController) Detail() endpoint.Endpoint {
+	return func(_ context.Context, request interface{}) (interface{}, error) {
+		req := request.(models.FindUserRequest)
+		user, err := c.userService.Detail(req.ID)
+		if err != nil {
+			return user, nil
+		}
+		return user, nil
+	}
+}

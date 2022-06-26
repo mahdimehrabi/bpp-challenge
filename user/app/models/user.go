@@ -26,8 +26,20 @@ type UserResponse struct {
 	Err string `json:"err,omitempty"`
 }
 
+type FindUserRequest struct {
+	ID int64 `json:"ID"`
+}
+
 func DecodeUserRequest(_ context.Context, r *http.Request) (interface{}, error) {
 	var request UserRequest
+	if err := json.NewDecoder(r.Body).Decode(&request); err != nil {
+		return nil, err
+	}
+	return request, nil
+}
+
+func DecodeFindUserRequest(_ context.Context, r *http.Request) (interface{}, error) {
+	var request FindUserRequest
 	if err := json.NewDecoder(r.Body).Decode(&request); err != nil {
 		return nil, err
 	}

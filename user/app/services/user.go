@@ -30,6 +30,15 @@ func (s UserService) List() ([]models.User, error) {
 	return users, nil
 }
 
+func (s UserService) Detail(id int64) (user models.User, err error) {
+	user, err = s.userRepository.Detail(id)
+	if err != nil {
+		s.logger.Error(err.Error())
+		return
+	}
+	return
+}
+
 func NewUserService(logger infrastractures.PasargadLogger, userRepository repositories.UserRepository) *UserService {
 
 	return &UserService{
