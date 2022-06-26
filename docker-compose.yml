@@ -6,6 +6,8 @@ services:
     extends:
       file: ./blog/docker-compose.yml
       service: web
+    env_file:
+      - .env
   blogdb:
     extends:
       file: ./blog/docker-compose.yml
@@ -16,6 +18,8 @@ services:
     extends:
       file: ./user/docker-compose.yml
       service: web
+    env_file:
+      - .env
   userdb:
     extends:
       file: ./user/docker-compose.yml

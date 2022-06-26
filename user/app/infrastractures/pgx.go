@@ -33,9 +33,9 @@ type PgxDB struct {
 func NewPgxDB(logger PasargadLogger) PgxDB {
 	connString := fmt.Sprintf(
 		"postgres://%s:%s@%s:%s/%s",
-		os.Getenv("DBUsername"), os.Getenv("DBPassword"),
-		os.Getenv("DBHost"), os.Getenv("DBPort"),
-		os.Getenv("DBName"),
+		os.Getenv("UserDBUsername"), os.Getenv("UserDBPassword"),
+		os.Getenv("UserDBHost"), os.Getenv("UserDBPort"),
+		os.Getenv("UserDBName"),
 	)
 	conn, err := pgx.Connect(context.TODO(), connString)
 	if err != nil {
